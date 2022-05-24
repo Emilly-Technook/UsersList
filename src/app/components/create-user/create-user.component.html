@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>Create new user</h1>
+<div mat-dialog-content>
+
+  <form (ngSubmit)="createUser()" >
+    <div>
+      <label>Name: </label>
+      <input matInput type="text" placeholder="name" [(ngModel)]="user.name" name="name">
+    </div>
+    <div>
+      <label #role style="display: block;">Role: </label>
+      <select matInput placeholder="role" [(ngModel)]="user.role" name="role">
+        <option selected value="Deliverer">Deliverer</option>
+        <option value="Manager">Manager</option>
+        <option value="Driver">Driver</option>
+        <option value="Administrator">Administrator</option>
+      </select>
+    </div>
+    <div>
+      <label #status style="display: block;">status</label>
+      <select matInput placeholder="status" [(ngModel)]="user.status" name="status">
+        <option selected value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+        <option value="Vacation">Vacation</option>
+      </select>
+    </div>
+    <div>
+      <label>Deliveries Made: </label>
+      <input matInput type="number" placeholder="deliveriesMade" [(ngModel)]="user.deliveriesMade" name="deliveriesMade">
+    </div>
+    <div>
+      <label>Deliveries in Progress: </label>
+      <input matInput type="number" placeholder="deliveriesInProgress" [(ngModel)]="user.deliveriesInProgress" name="deliveriesInProgress">
+    </div>
+    <button type="submit" mat-raised-button color="accent" [mat-dialog-close]="true">Submit</button>
+  </form>
+</div>

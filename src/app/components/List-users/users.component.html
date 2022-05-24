@@ -1,0 +1,42 @@
+<div style="margin: 8px;" *ngIf="!!(users?.length > 0)">
+  <mat-paginator *ngIf="users?.length > 0"
+    [length]="users?.length"
+    [pageSize]="10"
+    [pageSizeOptions]="[10, 30, 50]"
+    aria-label="Select page"
+    >
+  </mat-paginator>
+  <div>
+    <div>
+      <select [(ngModel)]="searchType">
+        <option selected value="name">name</option>
+        <option value="role">role</option>
+        <option value="status">status</option>
+        <option value="createAt">createAt</option>
+        <option value="updateAt">updateAt</option>
+      </select>
+      <input placeholder="Search" [(ngModel)]="searchText" />
+    </div>
+    <div *ngFor="let user of users | appFilter: searchText:searchType" style="width: 55vw;">
+      <mat-card
+        style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-top: 10px; ">
+        <div>
+          <span style="font-size: 15px;">{{user.name}}</span>
+          <span style="font-size: 12px; margin-left: 10px;">{{user.role}}</span>
+        </div>
+
+        <div>
+          <button mat-raised-button (click)="updateUser(user.id)" color="primary">Edit</button>
+          <button (click)="deleteUser(user.id)" mat-raised-button color="warn">Delete</button>
+          <button mat-raised-button color="accent" (click)="changeFavority(user.favority, user.id)">
+            <mat-icon *ngIf="user.favority">favorite</mat-icon>
+            <mat-icon *ngIf="!user.favority">favorite_border</mat-icon>
+          </button>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<div *ngIf="!(users?.length > 0)" style="margin: 20px">
+  <h3>No users found</h3>
+</div>
